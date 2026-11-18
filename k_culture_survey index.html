@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>한국의 K-컬처 인식 및 영향 조사</title>
+<style>
+:root{--ink:#20243a;--muted:#697086;--purple:#6d45c5;--pink:#e45c91;--line:#e9e5f0;--bg:#f7f4fb}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);font-family:Arial,"Noto Sans KR",sans-serif;color:var(--ink);line-height:1.6}
+.wrap{max-width:790px;margin:34px auto;padding:0 16px 40px}
+.hero{color:#fff;padding:36px 32px;border-radius:20px 20px 0 0;background:linear-gradient(125deg,#39216d,#7048c7 58%,#d45a91);position:relative;overflow:hidden}
+.hero:after{content:"♪";position:absolute;right:28px;top:5px;font-size:130px;opacity:.13}
+.kicker{font-size:12px;letter-spacing:2px;font-weight:bold;opacity:.85}
+h1{font-size:clamp(27px,5vw,38px);line-height:1.25;margin:12px 0}
+.subtitle{font-size:15px;color:#f4eefa;max-width:590px;margin:0}
+.meta{display:flex;flex-wrap:wrap;gap:10px 18px;margin-top:22px;font-size:13px;color:#f3eaff}
+form{background:white;padding:28px 32px 34px;border-radius:0 0 20px 20px;box-shadow:0 15px 45px #3e286010}
+.overview{background:#faf8fd;border:1px solid var(--line);border-radius:13px;padding:17px 18px;margin-bottom:24px}
+.overview h2{font-size:16px;margin:0 0 12px;color:var(--purple)}
+.info{display:grid;grid-template-columns:100px 1fr;gap:7px 12px;font-size:13px}
+.info b{color:#555b70}.info span{color:#454b5d}
+.instruction{font-size:14px;color:var(--muted);margin:0 0 10px}
+.progressline{display:flex;justify-content:space-between;font-size:12px;color:var(--muted);margin:18px 0 7px}
+.progress{height:6px;background:#eeeaf5;border-radius:20px;overflow:hidden}
+.progress span{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--purple),var(--pink));transition:width .2s}
+.question{padding:21px 0;border-bottom:1px solid #f0edf4}
+.qtitle{font-size:15px;font-weight:700;margin-bottom:13px}
+.req{color:#d34c78}
+.choices{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.choice{display:flex;align-items:flex-start;gap:10px;border:1px solid var(--line);border-radius:11px;padding:12px 13px;font-size:14px;cursor:pointer;transition:.15s}
+.choice:hover{background:#faf7ff;border-color:#b7a4df}
+input{accent-color:var(--purple);margin-top:4px}
+.actions{display:flex;gap:10px;margin-top:27px}
+button{border:0;border-radius:10px;padding:13px 20px;font-weight:700;font-size:14px;cursor:pointer}
+.submit{background:var(--purple);color:white;flex:1}.reset{background:#f0edf5;color:#55536a}
+.note{font-size:12px;color:var(--muted);margin:15px 0 0}
+#thanks{display:none;background:#fff;text-align:center;padding:45px 25px;border-radius:0 0 20px 20px;box-shadow:0 15px 45px #3e286010}
+#thanks h2{color:var(--purple)}
+@media(max-width:560px){.wrap{margin:14px auto}.hero{padding:28px 22px}form{padding:22px}.choices{grid-template-columns:1fr}.info{grid-template-columns:90px 1fr}.actions{flex-direction:column}}
+</style>
+</head>
+<body>
+<main class="wrap">
+<header class="hero">
+ <div class="kicker">ONLINE SURVEY · K-CULTURE</div>
+ <h1>한국의 K-컬처 인식 및 영향 조사</h1>
+ <p class="subtitle">K-팝부터 K-드라마까지, 한국 문화는 세계인의 생활을 어떻게 바꾸고 있을까?</p>
+ <div class="meta"><span>◷ 약 2~3분</span><span>▤ 총 5문항</span><span>◎ 대학생 대상</span></div>
+</header>
+<form id="survey">
+ <section class="overview">
+  <h2>1. 조사 개요</h2>
+  <div class="info">
+   <b>조사 주제</b><span>한국의 K-컬처 인식 및 영향 조사</span>
+   <b>조사 목적</b><span>한국의 대중문화에 대한 사람들의 관심과 인식을 알아본다.</span>
+   <b>조사 대상</b><span>한국인 및 외국인 대학생</span>
+   <b>조사 방법</b><span>온라인 설문조사</span>
+   <b>조사 내용</b><span>K-컬처 인지도, 콘텐츠 선호도, 한국에 대한 이미지 및 향후 관심도</span>
+  </div>
+ </section>
+ <p class="instruction">2. 설문조사 질문 및 보기<br>각 문항을 읽고 자신의 생각과 가장 가까운 답변 하나를 선택해 주세요.</p>
+ <div class="progressline"><span>응답 진행률</span><span id="count">0 / 5</span></div>
+ <div class="progress"><span id="bar"></span></div>
+
+ <div class="question">
+  <div class="qtitle">Q1. 한국의 K-컬처에 대해 얼마나 알고 있나요? <span class="req">*</span></div>
+  <div class="choices">
+   <label class="choice"><input required type="radio" name="q1" value="매우 잘 알고 있다">① 매우 잘 알고 있다.</label>
+   <label class="choice"><input type="radio" name="q1" value="어느 정도 알고 있다">② 어느 정도 알고 있다.</label>
+   <label class="choice"><input type="radio" name="q1" value="이름만 들어봤다">③ 이름만 들어봤다.</label>
+   <label class="choice"><input type="radio" name="q1" value="거의 알지 못한다">④ 거의 알지 못한다.</label>
+  </div>
+ </div>
+ <div class="question">
+  <div class="qtitle">Q2. 가장 관심 있는 한국 문화 분야는 무엇인가요? <span class="req">*</span></div>
+  <div class="choices">
+   <label class="choice"><input required type="radio" name="q2" value="K-팝과 한국 음악">① K-팝과 한국 음악</label>
+   <label class="choice"><input type="radio" name="q2" value="K-드라마와 영화">② K-드라마와 영화</label>
+   <label class="choice"><input type="radio" name="q2" value="한국 음식과 요리">③ 한국 음식과 요리</label>
+   <label class="choice"><input type="radio" name="q2" value="K-뷰티와 패션">④ K-뷰티와 패션</label>
+  </div>
+ </div>
+ <div class="question">
+  <div class="qtitle">Q3. 한국 문화를 처음 알게 된 계기는 무엇인가요? <span class="req">*</span></div>
+  <div class="choices">
+   <label class="choice"><input required type="radio" name="q3" value="유튜브와 SNS">① 유튜브와 SNS</label>
+   <label class="choice"><input type="radio" name="q3" value="친구나 가족의 추천">② 친구나 가족의 추천</label>
+   <label class="choice"><input type="radio" name="q3" value="TV와 영화">③ TV와 영화</label>
+   <label class="choice"><input type="radio" name="q3" value="학교나 한국 생활">④ 학교나 한국 생활</label>
+  </div>
+ </div>
+ <div class="question">
+  <div class="qtitle">Q4. 한국 문화를 경험한 후 한국에 대한 이미지가 어떻게 변했나요? <span class="req">*</span></div>
+  <div class="choices">
+   <label class="choice"><input required type="radio" name="q4" value="매우 긍정적으로 변했다">① 매우 긍정적으로 변했다.</label>
+   <label class="choice"><input type="radio" name="q4" value="조금 긍정적으로 변했다">② 조금 긍정적으로 변했다.</label>
+   <label class="choice"><input type="radio" name="q4" value="크게 달라지지 않았다">③ 크게 달라지지 않았다.</label>
+   <label class="choice"><input type="radio" name="q4" value="부정적으로 변했다">④ 부정적으로 변했다.</label>
+  </div>
+ </div>
+ <div class="question">
+  <div class="qtitle">Q5. 앞으로 K-컬처가 세계적으로 더 인기를 얻을 것이라고 생각하나요? <span class="req">*</span></div>
+  <div class="choices">
+   <label class="choice"><input required type="radio" name="q5" value="매우 그렇다">① 매우 그렇다.</label>
+   <label class="choice"><input type="radio" name="q5" value="그렇다">② 그렇다.</label>
+   <label class="choice"><input type="radio" name="q5" value="보통이다">③ 보통이다.</label>
+   <label class="choice"><input type="radio" name="q5" value="그렇지 않다">④ 그렇지 않다.</label>
+  </div>
+ </div>
+ <div class="actions">
+  <button class="submit" type="submit">설문 제출하기</button>
+  <button class="reset" type="reset">다시 작성하기</button>
+ </div>
+ <p class="note">※ 이 파일은 설문 화면 시안입니다. 현재 응답은 온라인 서버나 구글 설문지로 전송·저장되지 않습니다. 실제 응답을 수집하려면 Google Forms 또는 별도 서버 연결이 필요합니다.</p>
+</form>
+<section id="thanks">
+ <h2>참여해 주셔서 감사합니다!</h2>
+ <p>설문 화면 미리보기가 완료되었습니다.</p>
+ <p class="note">이 시안에서는 응답 데이터가 저장되지 않습니다.</p>
+ <button class="reset" onclick="location.reload()">설문으로 돌아가기</button>
+</section>
+</main>
+<script>
+const form=document.getElementById('survey'),bar=document.getElementById('bar'),count=document.getElementById('count');
+function progress(){let n=0;for(let i=1;i<=5;i++)if(form.querySelector(`[name="q${i}"]:checked`))n++;count.textContent=n+' / 5';bar.style.width=(n/5*100)+'%'}
+form.addEventListener('change',progress);
+form.addEventListener('submit',e=>{e.preventDefault();if(!form.reportValidity())return;form.style.display='none';document.getElementById('thanks').style.display='block';window.scrollTo({top:0,behavior:'smooth'})});
+form.addEventListener('reset',()=>setTimeout(progress,0));
+</script>
+</body>
+</html>
